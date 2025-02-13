@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../providers/providers.dart';
+
 class PermissionsScreen extends StatelessWidget {
   const PermissionsScreen({super.key});
 
@@ -21,7 +23,7 @@ class _PermissionsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
 
-    // final permissions = ref.watch( permissionsProvider );
+    final permissions = ref.watch( permissionsProvider );
     
 
 
@@ -29,12 +31,11 @@ class _PermissionsView extends ConsumerWidget {
       children: [
 
         CheckboxListTile(
-          // value: permissions.cameraGranted, 
-          value: true,
+          value: permissions.cameraGranted, 
           title: const Text('Cámara'),
-          // subtitle: Text('${ permissions.camera }'),
+          subtitle: Text('${ permissions.camera }'),
           onChanged: ( _ ) {
-            //ref.read(permissionsProvider.notifier).requestCameraAccess(); 
+            ref.read(permissionsProvider.notifier).requestCameraAccess(); 
           },
         ),
         // CheckboxListTile(
