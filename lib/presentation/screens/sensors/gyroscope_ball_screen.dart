@@ -19,7 +19,13 @@ class GyroscopeBallScreen extends ConsumerWidget {
           child: gyroscope$.when(
             data: (value) => MovingBall(x: value.x, y: value.y),
             error: (error, stackTrace) => const SensorError(),
-            loading: () => const CircularProgressIndicator(),
+            loading: () => const Center(
+              child: SizedBox(
+                height: 30,
+                width: 30,
+                child: CircularProgressIndicator(),
+              ),
+            ),
           ),
         ));
   }
