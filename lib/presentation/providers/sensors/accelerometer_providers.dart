@@ -37,6 +37,5 @@ final accelerometerUserProvider = StreamProvider.autoDispose<AccelometerXYZ>((re
 
     yield AccelometerXYZ(x, y, z);
   }
-
 });
 
