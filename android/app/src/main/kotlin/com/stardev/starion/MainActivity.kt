@@ -1,4 +1,4 @@
-package com.example.starion
+package com.stardev.starion
 
 import io.flutter.embedding.android.FlutterActivity
 
