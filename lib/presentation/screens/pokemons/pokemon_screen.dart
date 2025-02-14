@@ -8,19 +8,15 @@ import '../../providers/providers.dart';
 class PokemonScreen extends ConsumerWidget {
   final String pokemonId;
 
-  const PokemonScreen({ 
-    super.key, 
-    required this.pokemonId
-  });
+  const PokemonScreen({super.key, required this.pokemonId});
 
   @override
-  Widget build(BuildContext context, ref ) {
-
-    final pokemonAsync = ref.watch( pokemonProvider( pokemonId ) );
+  Widget build(BuildContext context, ref) {
+    final pokemonAsync = ref.watch(pokemonProvider(pokemonId));
 
     return pokemonAsync.when(
-      data: (pokemon) => _PokemonView(pokemon: pokemon), 
-      error: (error, stackTrace) => _ErrorWidget(message: error.toString()), 
+      data: (pokemon) => _PokemonView(pokemon: pokemon),
+      error: (error, stackTrace) => _ErrorWidget(message: error.toString()),
       loading: () => const _LoadingWidget(),
     );
   }
@@ -29,17 +25,22 @@ class PokemonScreen extends ConsumerWidget {
 class _PokemonView extends StatelessWidget {
   final Pokemon pokemon;
 
-  const _PokemonView({ required this.pokemon});
+  const _PokemonView({required this.pokemon});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text( pokemon.name ),
+        title: Text(pokemon.name),
         actions: [
-          IconButton(onPressed: () {
-            SharePlugin.shareLink(pokemon.spriteFront, 'Mira este pókmeon');
-          }, icon: const Icon( Icons.share_outlined))
+          IconButton(
+              onPressed: () {
+                SharePlugin.shareLink(
+                  'https://star-linking-website.up.railway.app/pokemons/${pokemon.id}/',
+                  'Mira este pókmeon',
+                );
+              },
+              icon: const Icon(Icons.share_outlined))
         ],
       ),
       body: Center(
@@ -55,15 +56,15 @@ class _PokemonView extends StatelessWidget {
 }
 
 class _ErrorWidget extends StatelessWidget {
-  final String message ;
+  final String message;
 
-  const _ErrorWidget({ required this.message});
+  const _ErrorWidget({required this.message});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text( message ),
+        child: Text(message),
       ),
     );
   }

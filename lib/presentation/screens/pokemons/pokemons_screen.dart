@@ -36,7 +36,7 @@ class PokemonsViewState extends ConsumerState<PokemonsView> {
         scrollController.position.maxScrollExtent) {
       ref.read(pokemonIdsProvider.notifier).update((state) => [
             ...state,
-            ...List.generate(30, (index) => state.length + index + 1)
+            ...List.generate(30, (index) => state.length + index + 1),
           ]);
     }
   }
@@ -44,7 +44,7 @@ class PokemonsViewState extends ConsumerState<PokemonsView> {
   @override
   void initState() {
     super.initState();
-    scrollController.addListener( infinitScroll );
+    scrollController.addListener(infinitScroll);
   }
 
   @override
