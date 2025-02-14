@@ -18,12 +18,8 @@ class GyroscopeXYZ {
   }
 }
 
-final gyroscopeProvider =
-    StreamProvider.autoDispose<GyroscopeXYZ>((ref) async* {
-  final stream =
-      gyroscopeEventStream(samplingPeriod: const Duration(milliseconds: 100));
-
-  await for (final event in stream) {
+final gyroscopeProvider =StreamProvider.autoDispose<GyroscopeXYZ>((ref) async* {
+  await for (final event in gyroscopeEventStream()) {
     final x = double.parse((event.x.toStringAsFixed(2)));
     final y = double.parse((event.y.toStringAsFixed(2)));
     final z = double.parse((event.z.toStringAsFixed(2)));
