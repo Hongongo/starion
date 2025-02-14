@@ -8,8 +8,8 @@ class MagnetometerScreen extends ConsumerWidget {
   const MagnetometerScreen({super.key});
 
   @override
-  Widget build(BuildContext context, ref ) {
-    final magnetometer$ = ref.watch( magnetometerProvider );
+  Widget build(BuildContext context, ref) {
+    final magnetometer$ = ref.watch(magnetometerProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -17,14 +17,13 @@ class MagnetometerScreen extends ConsumerWidget {
       ),
       body: Center(
         child: magnetometer$.when(
-          data: (value) => Text(
-            value.x.toString(),
-            style: const TextStyle(fontSize: 30),
-          ), 
-          error: (error, stackTrace) => const SensorError(), 
-          loading: () => const CircularProgressIndicator()
-        ),
+            data: (value) => Text(
+                  value.x.toString(),
+                  style: const TextStyle(fontSize: 30),
+                ),
+            error: (error, stackTrace) => const SensorError(),
+            loading: () => const CircularProgressIndicator()),
       ),
-    );  
+    );
   }
 }
