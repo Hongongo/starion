@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -8,13 +10,12 @@ final permissionsProvider =
 });
 
 class PermissionsNotifier extends StateNotifier<PermissionsState> {
-  PermissionsNotifier() : super(PermissionsState()) {
-    checkPermissions();
-  }
+  PermissionsNotifier() : super(PermissionsState());
 
   Future<void> checkPermissions() async {
     final permissionsArray = await Future.wait([
       Permission.camera.status,
+      // Platform.isAndroid ? Permission.mediaLibrary.status : Permission.photos.status,
       Permission.photos.status,
       Permission.sensors.status,
       Permission.location.status,
@@ -36,6 +37,15 @@ class PermissionsNotifier extends StateNotifier<PermissionsState> {
     openAppSettings();
   }
 
+//   Future<String> getAndroidVersion() async {
+//   if (Platform.isAndroid) {
+//     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+//     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+//     return "Android ${androidInfo.version.release} (SDK ${androidInfo.version.sdkInt})";
+//   }
+//   return "Not an Android device";
+// }
+
   void _checkPerssionState(PermissionStatus status) {
     if (status == PermissionStatus.permanentlyDenied) {
       openSettinsScreen();
@@ -50,6 +60,12 @@ class PermissionsNotifier extends StateNotifier<PermissionsState> {
   }
 
   requestPhotoLibraryAccess() async {
+    // late final PermissionStatus status;
+    // if (Platform.isAndroid) {
+    //   status = await Permission.mediaLibrary.request();
+    // } else {
+    //   status = await Permission.photos.request();
+    // }
     final status = await Permission.photos.request();
     state = state.copyWith(photoLibrary: status);
 
