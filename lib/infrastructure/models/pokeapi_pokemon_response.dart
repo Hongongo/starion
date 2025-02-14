@@ -368,12 +368,12 @@ class RedBlue {
     });
 
     factory RedBlue.fromJson(Map<String, dynamic> json) => RedBlue(
-        backDefault: json["back_default"],
-        backGray: json["back_gray"],
-        backTransparent: json["back_transparent"],
-        frontDefault: json["front_default"],
-        frontGray: json["front_gray"],
-        frontTransparent: json["front_transparent"],
+        backDefault: json["back_default"] ?? '',
+        backGray: json["back_gray"] ?? '',
+        backTransparent: json["back_transparent"] ?? '',
+        frontDefault: json["front_default"] ?? '',
+        frontGray: json["front_gray"] ?? '',
+        frontTransparent: json["front_transparent"] ?? '',
     );
 
     Map<String, dynamic> toJson() => {
@@ -432,14 +432,14 @@ class Crystal {
     });
 
     factory Crystal.fromJson(Map<String, dynamic> json) => Crystal(
-        backDefault: json["back_default"],
-        backShiny: json["back_shiny"],
-        backShinyTransparent: json["back_shiny_transparent"],
-        backTransparent: json["back_transparent"],
-        frontDefault: json["front_default"],
-        frontShiny: json["front_shiny"],
-        frontShinyTransparent: json["front_shiny_transparent"],
-        frontTransparent: json["front_transparent"],
+        backDefault: json["back_default"] ?? '',
+        backShiny: json["back_shiny"] ?? '',
+        backShinyTransparent: json["back_shiny_transparent"] ?? '',
+        backTransparent: json["back_transparent"] ?? '',
+        frontDefault: json["front_default"] ?? '',
+        frontShiny: json["front_shiny"] ?? '',
+        frontShinyTransparent: json["front_shiny_transparent"] ?? '',
+        frontTransparent: json["front_transparent"] ?? '',
     );
 
     Map<String, dynamic> toJson() => {
@@ -470,11 +470,11 @@ class Gold {
     });
 
     factory Gold.fromJson(Map<String, dynamic> json) => Gold(
-        backDefault: json["back_default"],
-        backShiny: json["back_shiny"],
-        frontDefault: json["front_default"],
-        frontShiny: json["front_shiny"],
-        frontTransparent: json["front_transparent"],
+        backDefault: json["back_default"] ?? '',
+        backShiny: json["back_shiny"] ?? '',
+        frontDefault: json["front_default"] ?? '',
+        frontShiny: json["front_shiny"] ?? '',
+        frontTransparent: json["front_transparent"] ?? '',
     );
 
     Map<String, dynamic> toJson() => {
@@ -520,8 +520,8 @@ class OfficialArtwork {
     });
 
     factory OfficialArtwork.fromJson(Map<String, dynamic> json) => OfficialArtwork(
-        frontDefault: json["front_default"],
-        frontShiny: json["front_shiny"],
+        frontDefault: json["front_default"] ?? '',
+        frontShiny: json["front_shiny"] ?? '',
     );
 
     Map<String, dynamic> toJson() => {
@@ -544,10 +544,10 @@ class Home {
     });
 
     factory Home.fromJson(Map<String, dynamic> json) => Home(
-        frontDefault: json["front_default"],
-        frontFemale: json["front_female"],
-        frontShiny: json["front_shiny"],
-        frontShinyFemale: json["front_shiny_female"],
+        frontDefault: json["front_default"] ?? '',
+        frontFemale: json["front_female"] ?? '',
+        frontShiny: json["front_shiny"] ?? '',
+        frontShinyFemale: json["front_shiny_female"] ?? '',
     );
 
     Map<String, dynamic> toJson() => {
