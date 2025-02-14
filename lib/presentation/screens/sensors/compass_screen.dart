@@ -1,10 +1,9 @@
-import 'dart:math' show pi;
-
+// import 'dart:math' show pi;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// import 'package:miscelaneos/presentation/providers/providers.dart';
-// import 'package:miscelaneos/presentation/screens/screens.dart';
+import '../../providers/providers.dart';
+import '../screens.dart';
 
 class CompassScreen extends ConsumerWidget {
   const CompassScreen({super.key});
@@ -12,14 +11,12 @@ class CompassScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref ) {
 
-    // final locationGranted = ref.watch( permissionsProvider ).locationGranted;
-    // final compassHeading$ = ref.watch( compassProvider );
+    final locationGranted = ref.watch( permissionsProvider ).locationGranted;
+    final compassHeading$ = ref.watch( compassProvider );
 
-    // if ( !locationGranted ) {
-    //   return const AskLocationScreen();
-    // }
-
-
+    if ( !locationGranted ) {
+      return const AskLocationScreen();
+    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -28,22 +25,20 @@ class CompassScreen extends ConsumerWidget {
         backgroundColor: Colors.black,
         iconTheme: const IconThemeData( color: Colors.white )
       ),
-      // body: Center(
-      //   child: compassHeading$.when(
-      //     data: (heading) => Compass( heading: heading ?? 0 ), 
-      //     error: (error, stackTrace) => Text('$error', style: const TextStyle( color: Colors.white )), 
-      //     loading: () => const CircularProgressIndicator(),
-      //   ),
-      // )
+      body: Center(
+        child: compassHeading$.when(
+          data: (heading) => Compass( heading: heading ?? 0 ), 
+          error: (error, stackTrace) => Text('$error', style: const TextStyle( color: Colors.white )), 
+          loading: () => const CircularProgressIndicator(),
+        ),
+      )
     );
     
   }
 }
 
 class Compass extends StatefulWidget {
-
   final double heading;
-
 
   const Compass({super.key, required this.heading});
 
@@ -52,12 +47,10 @@ class Compass extends StatefulWidget {
 }
 
 class _CompassState extends State<Compass> {
-
   double prevValue = 0.0;
   double turns = 0;
 
   double getTurns() {
-
     double? direction = widget.heading;
     direction = (direction < 0) ? (360 + direction): direction;
 
@@ -78,7 +71,6 @@ class _CompassState extends State<Compass> {
     return turns * -1;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -86,9 +78,9 @@ class _CompassState extends State<Compass> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         
-        // Text('${widget.heading.ceil()}', style: const TextStyle(color: Colors.white, fontSize: 30)),
+        Text('${widget.heading.ceil()}', style: const TextStyle(color: Colors.white, fontSize: 30)),
 
-        // const SizedBox(height: 20),
+        const SizedBox(height: 20),
 
         Stack(
           alignment: Alignment.center,
@@ -97,7 +89,7 @@ class _CompassState extends State<Compass> {
             // Image.asset('assets/images/compass/quadrant-1.png'),
             
             // Transform.rotate(
-            //   angle: (heading * (pi / 180) * -1),
+            //   angle: (widget.heading * (pi / 180) * -1),
             //   child: Image.asset('assets/images/compass/needle-1.png'),
             // ),
 
@@ -108,7 +100,6 @@ class _CompassState extends State<Compass> {
             //   child: Image.asset('assets/images/compass/needle-1.png'),
             // ),
 
-
             AnimatedRotation(
               curve: Curves.easeOut,
               turns: getTurns(), 
@@ -117,8 +108,6 @@ class _CompassState extends State<Compass> {
             ),
 
             Image.asset('assets/images/compass/needle-1.png'),
-            
-
 
           ],
         )
@@ -126,8 +115,3 @@ class _CompassState extends State<Compass> {
     );
   }
 }
-
-
-
-
-

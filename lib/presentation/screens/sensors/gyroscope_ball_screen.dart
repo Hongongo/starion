@@ -12,22 +12,23 @@ class GyroscopeBallScreen extends ConsumerWidget {
     final gyroscope$ = ref.watch(gyroscopeProvider);
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Giroscópio'),
-        ),
-        body: SizedBox.expand(
-          child: gyroscope$.when(
-            data: (value) => MovingBall(x: value.x, y: value.y),
-            error: (error, stackTrace) => const SensorError(),
-            loading: () => const Center(
-              child: SizedBox(
-                height: 30,
-                width: 30,
-                child: CircularProgressIndicator(),
-              ),
+      appBar: AppBar(
+        title: const Text('Giroscópio'),
+      ),
+      body: SizedBox.expand(
+        child: gyroscope$.when(
+          data: (value) => MovingBall(x: value.x, y: value.y),
+          error: (error, stackTrace) => const SensorError(),
+          loading: () => const Center(
+            child: SizedBox(
+              height: 30,
+              width: 30,
+              child: CircularProgressIndicator(),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
