@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../config/config.dart';
 import '../../../domain/domain.dart';
 import '../../providers/providers.dart';
 
@@ -37,8 +38,7 @@ class _PokemonView extends StatelessWidget {
         title: Text( pokemon.name ),
         actions: [
           IconButton(onPressed: () {
-            // Link = Deeplink
-            // SharePlugin.shareLink(pokemon.spriteFront, 'Mira este pókmeon');
+            SharePlugin.shareLink(pokemon.spriteFront, 'Mira este pókmeon');
           }, icon: const Icon( Icons.share_outlined))
         ],
       ),
@@ -53,7 +53,6 @@ class _PokemonView extends StatelessWidget {
     );
   }
 }
-
 
 class _ErrorWidget extends StatelessWidget {
   final String message ;
@@ -70,9 +69,7 @@ class _ErrorWidget extends StatelessWidget {
   }
 }
 
-
 class _LoadingWidget extends StatelessWidget {
-
   const _LoadingWidget();
 
   @override
