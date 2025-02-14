@@ -22,7 +22,7 @@ final gyroscopeProvider =
     StreamProvider.autoDispose<GyroscopeXYZ>((ref) async* {
   final stream =
       gyroscopeEventStream(samplingPeriod: const Duration(milliseconds: 100));
-      
+
   await for (final event in stream) {
     final x = double.parse((event.x.toStringAsFixed(2)));
     final y = double.parse((event.y.toStringAsFixed(2)));
