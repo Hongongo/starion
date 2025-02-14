@@ -46,7 +46,7 @@ class HomeMenuItem extends StatelessWidget {
     required this.title,
     required this.route,
     required this.icon,
-    this.bgColors = const [ Colors.green, Colors.purpleAccent],
+    this.bgColors = const [ Colors.green, Colors.yellow],
   });
 
   @override
@@ -59,8 +59,8 @@ class HomeMenuItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
               colors: bgColors,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             )),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
