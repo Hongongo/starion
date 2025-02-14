@@ -34,7 +34,6 @@ class LocalAuthPlugin {
           );
 
         return (didAuthenticate, didAuthenticate ? 'Hecho':'Cancelado por usuario');
-        
       } on PlatformException catch (e) {
         print('e');
 
