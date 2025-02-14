@@ -10,7 +10,8 @@ final canCheckBiometricsProvider = FutureProvider<bool>((ref) async {
 
 //* Local Auth provider
 
-final localAuthProvider =StateNotifierProvider<LocalAuthNotifier, LocalAuthState>((ref) {
+final localAuthProvider =
+    StateNotifierProvider<LocalAuthNotifier, LocalAuthState>((ref) {
   return LocalAuthNotifier();
 });
 
@@ -40,9 +41,10 @@ class LocalAuthState {
   @override
   String toString() {
     return '''
-
       didAuthenticate: $didAuthenticate
+
       status: $status
+      
       message: $message
     ''';
   }

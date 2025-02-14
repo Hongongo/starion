@@ -9,32 +9,53 @@ class BiometricScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final canCheckBiometrics = ref.watch(canCheckBiometricsProvider);
-    // final localAuthState = ref.watch( localAuthProvider );
+    final localAuthState = ref.watch(localAuthProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Biometric Screen')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            FilledButton.tonal(
-              onPressed: () {
-                //  ref.read( localAuthProvider.notifier )
-                //   .authenticateUser();
-              },
-              child: const Text('Autenticar'),
-            ),
-
-            canCheckBiometrics.when(
-                data: (canCheck) =>
-                    Text('Puede revisar biométricos: $canCheck'),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FilledButton.tonal(
+                onPressed: () {
+                  ref.read(localAuthProvider.notifier).authenticateUser();
+                },
+                child: const Text('Autenticar'),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              canCheckBiometrics.when(
+                data: (canCheck) => Text(
+                  'Puede revisar biométricos: $canCheck',
+                  style: const TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
                 error: (error, _) => Text('Error: $error'),
-                loading: () => const CircularProgressIndicator()),
-
-            const SizedBox(height: 40),
-            const Text('Estado del biométrico', style: TextStyle(fontSize: 30)),
-            // Text('Estado $localAuthState', style: const TextStyle( fontSize: 20 )),
-          ],
+                loading: () => const CircularProgressIndicator(),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Estado del biométrico',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.blue,
+                ),
+              ),
+              Text(
+                '\n$localAuthState',
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ),
     );
