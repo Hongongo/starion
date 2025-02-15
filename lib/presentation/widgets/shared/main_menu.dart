@@ -19,11 +19,17 @@ final menuItems = <MenuItem>[
   MenuItem('Pokemons', Icons.catching_pokemon, '/pokemons'),
   MenuItem('Biometrics', Icons.fingerprint, '/biometrics'),
 
+  // Maps and location
   MenuItem('Location', Icons.pin_drop, '/location'),
   MenuItem('Maps', Icons.map_outlined, '/maps'),
   MenuItem('Control', Icons.gamepad_outlined, '/controlled-map'),
 
+  // Badge
   MenuItem('Badge', Icons.notification_important, '/badge'),
+
+  // Ads
+  MenuItem('Ad Full', Icons.ad_units_outlined, '/ad-fullscreen'),
+  MenuItem('Ad Reward', Icons.fort_rounded, '/ad-rewarded'),
 
 ];
 
