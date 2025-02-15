@@ -22,4 +22,14 @@ Set android PATH variable (temporary)
 export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 ```
 
-## Add Google API KEY in gradle.properties
+## Add Google API KEY for Android  
+
+```
+gradle.properties
+```
+
+## Add Google API KEY for iOS 
+
+```
+ios/Keys.xcconfig
+```
