@@ -25,11 +25,13 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 11)
 ## Add Google API KEY for Android  
 
 ```
-gradle.properties
+android/gradle.properties
+API_KEY=YOUR_API_KEY
 ```
 
 ## Add Google API KEY for iOS 
 
 ```
 ios/Keys.xcconfig
+API_KEY=YOUR_API_KEY
 ```
