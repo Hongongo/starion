@@ -54,9 +54,40 @@ class MapNotifier extends StateNotifier<MapState> {
   void setMapController(GoogleMapController controller) {
     state = state.copyWith(controller: controller, isReady: true);
   }
+
+  goToLocation(double latitude, double longitude) {
+    final newPosition = CameraPosition(
+      target: LatLng(latitude, longitude),
+      zoom: 15,
+    );
+
+    state.controller?.animateCamera(
+      CameraUpdate.newCameraPosition(newPosition),
+    );
+  }
+
+  toggleFollowUser() {
+    state = state.copyWith(followUser: !state.followUser);
+
+    if (state.followUser) {
+      findUser();
+
+      userLocation$ = trackUser().listen((event) {
+        goToLocation(event.$1, event.$2);
+      });
+    } else {
+      userLocation$?.cancel();
+    }
+  }
+
+  findUser() {
+    if (lastKnownLocation == null) return;
+    final (latitude, longitude) = lastKnownLocation!;
+    goToLocation(latitude, longitude);
+  }
 }
 
 final mapControllerProvider =
-    StateNotifierProvider.autoDispose<MapNotifier, MapState>((ref) {
+    StateNotifierProvider<MapNotifier, MapState>((ref) {
   return MapNotifier();
 });

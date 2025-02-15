@@ -33,7 +33,7 @@ class MapAndControls extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    // final mapControllerState = ref.watch( mapControllerProvider );
+    final mapControllerState = ref.watch(mapControllerProvider);
 
     return Stack(
       children: [
@@ -41,23 +41,27 @@ class MapAndControls extends ConsumerWidget {
 
         // * Boton para salir
         Positioned(
-            top: 40,
-            left: 20,
-            child: IconButton.filledTonal(
-                onPressed: () {
-                  context.pop();
-                },
-                icon: const Icon(Icons.arrow_back))),
+          top: 40,
+          left: 20,
+          child: IconButton.filledTonal(
+            onPressed: () {
+              context.pop();
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
+        ),
 
         //* Ir a la posición del usuario
         Positioned(
-            bottom: 40,
-            left: 20,
-            child: IconButton.filledTonal(
-                onPressed: () {
-                  // ref.read( mapControllerProvider.notifier ).findUser();
-                },
-                icon: const Icon(Icons.location_searching))),
+          bottom: 40,
+          left: 20,
+          child: IconButton.filledTonal(
+            onPressed: () {
+              ref.read( mapControllerProvider.notifier ).findUser();
+            },
+            icon: const Icon(Icons.location_searching),
+          ),
+        ),
 
         // * Seguir usuario
         Positioned(
@@ -65,11 +69,13 @@ class MapAndControls extends ConsumerWidget {
           left: 20,
           child: IconButton.filledTonal(
             onPressed: () {
-              //  ref.read( mapControllerProvider.notifier )
-              //     .toggleFollowUser();
+              ref.read(mapControllerProvider.notifier).toggleFollowUser();
             },
             icon: Icon(
-                Icons.accessibility_new_outlined),
+              mapControllerState.followUser
+                  ? Icons.directions_run
+                  : Icons.accessibility_new_outlined,
+            ),
           ),
         ),
 
@@ -109,13 +115,15 @@ class __MapViewState extends ConsumerState<_MapView> {
       // markers: mapController.markersSet,
       mapType: MapType.normal,
       initialCameraPosition: CameraPosition(
-          target: LatLng(widget.initialLat, widget.initialLng), zoom: 12),
+        target: LatLng(widget.initialLat, widget.initialLng),
+        zoom: 13,
+      ),
       myLocationEnabled: true,
       zoomControlsEnabled: false,
       myLocationButtonEnabled: false,
       onMapCreated: (GoogleMapController controller) {
         // _controller.complete(controller);
-        // ref.read(mapControllerProvider.notifier).setMapController(controller);
+        ref.read(mapControllerProvider.notifier).setMapController(controller);
       },
       onLongPress: (latLng) {
         // ref
