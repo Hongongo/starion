@@ -15,3 +15,9 @@ This commands work better wi Java Version 17 or 11
 cd android
 ./gradlew signingReport
 ```
+
+Set android PATH variable (temporary)
+
+```
+export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+```

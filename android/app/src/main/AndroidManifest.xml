@@ -39,6 +39,8 @@
         android:label="starion"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyAThkA-PxnOSj1FSJXjDTlllS432njIv5k"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
