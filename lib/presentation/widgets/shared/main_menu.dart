@@ -30,7 +30,6 @@ final menuItems = <MenuItem>[
   // Ads
   MenuItem('Ad Full', Icons.ad_units_outlined, '/ad-fullscreen'),
   MenuItem('Ad Reward', Icons.fort_rounded, '/ad-rewarded'),
-
 ];
 
 class MainMenu extends StatelessWidget {
@@ -43,8 +42,13 @@ class MainMenu extends StatelessWidget {
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       children: menuItems
-          .map((item) => HomeMenuItem(
-              title: item.title, route: item.route, icon: item.icon))
+          .map(
+            (item) => HomeMenuItem(
+              title: item.title,
+              route: item.route,
+              icon: item.icon,
+            ),
+          )
           .toList(),
     );
   }
@@ -86,6 +90,7 @@ class HomeMenuItem extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: const TextStyle(
+                overflow: TextOverflow.ellipsis,
                 color: Colors.white,
                 fontSize: 10,
               ),
