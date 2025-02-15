@@ -108,6 +108,6 @@ class MapNotifier extends StateNotifier<MapState> {
 }
 
 final mapControllerProvider =
-    StateNotifierProvider<MapNotifier, MapState>((ref) {
+    StateNotifierProvider.autoDispose<MapNotifier, MapState>((ref) {
   return MapNotifier();
 });

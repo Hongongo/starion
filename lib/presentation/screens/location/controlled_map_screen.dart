@@ -28,8 +28,11 @@ class MapAndControls extends ConsumerWidget {
   final double latitude;
   final double longitude;
 
-  const MapAndControls(
-      {super.key, required this.latitude, required this.longitude});
+  const MapAndControls({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+  });
 
   @override
   Widget build(BuildContext context, ref) {
@@ -100,7 +103,10 @@ class _MapView extends ConsumerStatefulWidget {
   final double initialLat;
   final double initialLng;
 
-  const _MapView({required this.initialLat, required this.initialLng});
+  const _MapView({
+    required this.initialLat,
+    required this.initialLng,
+  });
 
   @override
   __MapViewState createState() => __MapViewState();
@@ -116,7 +122,7 @@ class __MapViewState extends ConsumerState<_MapView> {
       mapType: MapType.normal,
       initialCameraPosition: CameraPosition(
         target: LatLng(widget.initialLat, widget.initialLng),
-        zoom: 13,
+        zoom: 15,
       ),
       myLocationEnabled: true,
       zoomControlsEnabled: false,
@@ -126,9 +132,9 @@ class __MapViewState extends ConsumerState<_MapView> {
         ref.read(mapControllerProvider.notifier).setMapController(controller);
       },
       onLongPress: (latLng) {
-        // ref
-        //     .read(mapControllerProvider.notifier)
-        //     .addMarker(latLng.latitude, latLng.longitude, 'Custom Marker');
+        ref
+            .read(mapControllerProvider.notifier)
+            .addMarker(latLng.latitude, latLng.longitude, 'Custom Marker');
       },
     );
   }
