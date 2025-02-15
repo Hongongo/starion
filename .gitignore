@@ -43,5 +43,5 @@ app.*.map.json
 /android/app/release
 
 # API KEYS
-android/gradle.properties
+/android/gradle.properties
 ios/Keys.xcconfig
