@@ -5,10 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'config/config.dart';
 import 'presentation/providers/providers.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   QuickActionsPlugin.registerActions();
+
+  await AdmobPlugin.initialize();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
