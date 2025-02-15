@@ -85,6 +85,26 @@ class MapNotifier extends StateNotifier<MapState> {
     final (latitude, longitude) = lastKnownLocation!;
     goToLocation(latitude, longitude);
   }
+
+  void addMarkerCurrentPosition() {
+    if (lastKnownLocation == null) return;
+
+    final (latitude, longitude) = lastKnownLocation!;
+    addMarker(latitude, longitude, 'Por aquí pasó el usuario');
+  }
+
+  void addMarker(double latitude, double longitude, String name) {
+    final newMarker = Marker(
+      markerId: MarkerId('${state.markers.length}'),
+      position: LatLng(latitude, longitude),
+      infoWindow: InfoWindow(
+        title: name,
+        snippet: 'Esto es el snippet del info window',
+      ),
+    );
+
+    state = state.copyWith(markers: [...state.markers, newMarker]);
+  }
 }
 
 final mapControllerProvider =
