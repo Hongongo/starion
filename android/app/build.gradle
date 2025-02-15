@@ -28,6 +28,7 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        manifestPlaceholders["API_KEY"] = project.findProperty("API_KEY") ?: "default_api_key"
     }
 
     buildTypes {
