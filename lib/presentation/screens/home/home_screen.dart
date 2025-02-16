@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:starion/presentation/widgets/shared/main_menu.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../../providers/providers.dart';
+import '../../widgets/widgets.dart';
+
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final adBannerAsync = ref.watch(adBannerProvider);
+
     return Scaffold(
       body: Column(
         children: [
@@ -19,10 +25,11 @@ class HomeScreen extends StatelessWidget {
                     title: const Text('Miscelaneos'),
                     actions: [
                       IconButton(
-                          onPressed: () {
-                            context.push('/permissions');
-                          },
-                          icon: const Icon(Icons.settings))
+                        onPressed: () {
+                          context.push('/permissions');
+                        },
+                        icon: const Icon(Icons.settings),
+                      )
                     ],
                   ),
                   const MainMenu(),
@@ -30,9 +37,17 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-        
+
           // Ad banner
-          Container(color: Colors.red, width: double.infinity, height: 75,),
+          adBannerAsync.when(
+            data: (bannerAd) => SizedBox(
+              width: bannerAd.size.width.toDouble(),
+              height: bannerAd.size.height.toDouble(),
+              child: AdWidget(ad: bannerAd),
+            ),
+            error: (_, __) => const SizedBox(),
+            loading: () => const SizedBox(),
+          ),
         ],
       ),
     );
