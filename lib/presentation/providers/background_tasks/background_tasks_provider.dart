@@ -27,7 +27,7 @@ class BackgroundFetchNotifier extends StateNotifier<bool?> {
     await Workmanager().registerPeriodicTask(
       processKeyName,
       processKeyName,
-      frequency: const Duration(seconds: 5),
+      frequency: const Duration(minutes: 16),
       inputData: {'input': 'data'},
       constraints: Constraints(networkType: NetworkType.connected),
       tag: processKeyName,
