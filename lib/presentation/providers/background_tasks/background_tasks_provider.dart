@@ -5,10 +5,8 @@ import '../../../config/config.dart';
 
 class BackgroundFetchNotifier extends StateNotifier<bool?> {
   final String processKeyName;
-  
-  BackgroundFetchNotifier({
-    required this.processKeyName
-  }): super(false) {
+
+  BackgroundFetchNotifier({required this.processKeyName}) : super(false) {
     checkCurrentStatus();
   }
 
@@ -17,7 +15,7 @@ class BackgroundFetchNotifier extends StateNotifier<bool?> {
   }
 
   toggleProcess() {
-    if ( state == true ) {
+    if (state == true) {
       deactivateProcess();
     } else {
       activateProcess();
@@ -26,16 +24,14 @@ class BackgroundFetchNotifier extends StateNotifier<bool?> {
 
   activateProcess() async {
     // La primera vez es inmediato
-    await Workmanager()
-      .registerPeriodicTask(
-        processKeyName, 
-        processKeyName,
-        frequency: const Duration( seconds: 10 ), // lo cambiará a 15 minutos
-        constraints: Constraints(
-          networkType: NetworkType.connected
-        ),
-        tag: processKeyName,
-      );
+    await Workmanager().registerPeriodicTask(
+      processKeyName,
+      processKeyName,
+      frequency: const Duration(seconds: 5),
+      inputData: {'input': 'data'},
+      constraints: Constraints(networkType: NetworkType.connected),
+      tag: processKeyName,
+    );
 
     await SharePreferencesPlugin.setBool(processKeyName, true);
     state = true;
@@ -48,8 +44,10 @@ class BackgroundFetchNotifier extends StateNotifier<bool?> {
   }
 }
 
-final backgroundPokemonFetchProvider = StateNotifierProvider<BackgroundFetchNotifier, bool?>((ref) {
-  return BackgroundFetchNotifier(processKeyName: fetchPeriodicBackgroundTaskKey );
+final backgroundPokemonFetchProvider =
+    StateNotifierProvider<BackgroundFetchNotifier, bool?>((ref) {
+  return BackgroundFetchNotifier(
+      processKeyName: fetchPeriodicBackgroundTaskKey);
 });
 
 // fetchPeriodicBackgroundTaskKey

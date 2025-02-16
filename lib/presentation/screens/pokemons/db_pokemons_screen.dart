@@ -12,7 +12,7 @@ class DbPokemonsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final pokemonsAsync = ref.watch(pokemonDbProvider);
-    // final isBackgroundFetchActive = ref.watch(backgroundPokemonFetchProvider);
+    final isBackgroundFetchActive = ref.watch(backgroundPokemonFetchProvider);
 
     if (pokemonsAsync.isLoading) {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
@@ -45,12 +45,11 @@ class DbPokemonsScreen extends ConsumerWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           // Activar o desactivar una tarea periódica
-          // ref.read(backgroundPokemonFetchProvider.notifier).toggleProcess();
+          ref.read(backgroundPokemonFetchProvider.notifier).toggleProcess();
         },
-        // label: (isBackgroundFetchActive == true)
-        //     ? const Text('Desactivar fetch periódico')
-        //     : const Text('Activar fetch periódico'),
-        label: const Text('Activate periodic fetch'),
+        label: (isBackgroundFetchActive == true)
+            ? const Text('Desactivar fetch periódico')
+            : const Text('Activar fetch periódico'),
         icon: const Icon(Icons.av_timer),
       ),
     );

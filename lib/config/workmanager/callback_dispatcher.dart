@@ -30,7 +30,6 @@ void callbackDispatcher() {
   });
 }
 
-
 Future loadNextPokemon() async {
   final localDbRepository = LocalDbRepositoryImpl();
   final pokemonRepository = PokemonsRepositoryImpl();
