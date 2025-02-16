@@ -35,3 +35,11 @@ API_KEY=YOUR_API_KEY
 ios/Keys.xcconfig
 API_KEY=YOUR_API_KEY
 ```
+
+## Code Generator (ISAR, Riverpod)
+
+```
+dart run build_runner build
+flutter pub run build_runner build
+flutter pub run build_runner watch (riverpod)
+```
