@@ -32,7 +32,7 @@ void main() async {
   //   )
   // );
 
-  Workmanager().registerOneOffTask('task-identifier', 'simpleTask');
+  // Workmanager().registerOneOffTask('task-identifier', 'simpleTask');
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
