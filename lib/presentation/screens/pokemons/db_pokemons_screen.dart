@@ -11,14 +11,14 @@ class DbPokemonsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ref) {
-    // final pokemonsAsync = ref.watch(pokemonDbProvider);
+    final pokemonsAsync = ref.watch(pokemonDbProvider);
     // final isBackgroundFetchActive = ref.watch(backgroundPokemonFetchProvider);
 
-    // if ( pokemonsAsync.isLoading ){
-    //   return const Scaffold( body: Center(child: CircularProgressIndicator()));
-    // }
+    if (pokemonsAsync.isLoading) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
 
-    // final List<Pokemon> pokemons = pokemonsAsync.value ?? [];
+    final List<Pokemon> pokemons = pokemonsAsync.value ?? [];
 
     return Scaffold(
       appBar: AppBar(
@@ -37,9 +37,9 @@ class DbPokemonsScreen extends ConsumerWidget {
           )
         ],
       ),
-      body: const CustomScrollView(
+      body: CustomScrollView(
         slivers: [
-          _PokemonsGrid(pokemons: []),
+          _PokemonsGrid(pokemons: pokemons),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
