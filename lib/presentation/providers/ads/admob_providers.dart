@@ -22,11 +22,11 @@ final adInterstitialProvider =
   return ad;
 });
 
-// final adRewardedProvider = FutureProvider.autoDispose<RewardedAd>((ref) async {
-//   final showAds = ref.watch(showAdsProvider);
-//   if (!showAds) throw 'Ads están bloqueadas';
+final adRewardedProvider = FutureProvider.autoDispose<RewardedAd>((ref) async {
+  // final showAds = ref.watch(showAdsProvider);
+  // if (!showAds) throw 'Ads están bloqueadas';
 
-//   final ad = await AdmobPlugin.loadRewardedAd();
+  final ad = await AdmobPlugin.loadRewardedAd();
 
-//   return ad;
-// });
+  return ad;
+});
