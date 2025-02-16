@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 import '../../../config/config.dart';
 import '../../../domain/domain.dart';
 import '../../../presentation/providers/providers.dart';
-
 
 class DbPokemonsScreen extends ConsumerWidget {
   const DbPokemonsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, ref ) {
-
+  Widget build(BuildContext context, ref) {
     // final pokemonsAsync = ref.watch(pokemonDbProvider);
     // final isBackgroundFetchActive = ref.watch(backgroundPokemonFetchProvider);
 
-    // if ( pokemonsAsync.isLoading ){ 
+    // if ( pokemonsAsync.isLoading ){
     //   return const Scaffold( body: Center(child: CircularProgressIndicator()));
     // }
 
@@ -27,35 +24,35 @@ class DbPokemonsScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Background Process'),
         actions: [
-          IconButton(onPressed: (){
-            
-            // Workmanager()
-            //   .registerOneOffTask(
-            //     fetchBackgroundTaskKey, 
-            //     fetchBackgroundTaskKey,
-            //     initialDelay: const Duration( seconds: 3),
-            //     inputData: { 'howMany': 30 }
-            //   );
-
-
-          }, icon: const Icon(Icons.add_alarm_sharp),)
-        ],  
-      ),
-      body: CustomScrollView(
-        slivers: [
-          _PokemonsGrid( pokemons: []),
+          IconButton(
+            onPressed: () {
+              Workmanager().registerOneOffTask(
+                fetchBackgroundTaskKey,
+                fetchBackgroundTaskKey,
+                initialDelay: const Duration(seconds: 3),
+                inputData: {'howMany': 30},
+              );
+            },
+            icon: const Icon(Icons.add_alarm_sharp),
+          )
         ],
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: () {
+      body: const CustomScrollView(
+        slivers: [
+          _PokemonsGrid(pokemons: []),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
           // Activar o desactivar una tarea periódica
-          // ref.read( backgroundPokemonFetchProvider.notifier ).toggleProcess();
-        // }, 
+          // ref.read(backgroundPokemonFetchProvider.notifier).toggleProcess();
+        },
         // label: (isBackgroundFetchActive == true)
-        //   ? const Text('Desactivar fetch periódico')
-        //   : const Text('Activar fetch periódico'),
-      //   icon: const Icon( Icons.av_timer ),
-      // ),
+        //     ? const Text('Desactivar fetch periódico')
+        //     : const Text('Activar fetch periódico'),
+        label: const Text('Activate periodic fetch'),
+        icon: const Icon(Icons.av_timer),
+      ),
     );
   }
 }
@@ -63,7 +60,7 @@ class DbPokemonsScreen extends ConsumerWidget {
 class _PokemonsGrid extends StatelessWidget {
   final List<Pokemon> pokemons;
 
-  const _PokemonsGrid({ required this.pokemons});
+  const _PokemonsGrid({required this.pokemons});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +69,7 @@ class _PokemonsGrid extends StatelessWidget {
         crossAxisCount: 3,
         crossAxisSpacing: 2,
         mainAxisSpacing: 2,
-      ), 
+      ),
       itemCount: pokemons.length,
       itemBuilder: (context, index) {
         final pokemon = pokemons[index];
@@ -83,7 +80,7 @@ class _PokemonsGrid extends StatelessWidget {
               pokemon.spriteFront,
               fit: BoxFit.contain,
             ),
-            Text( pokemon.name ),
+            Text(pokemon.name),
           ],
         );
       },
