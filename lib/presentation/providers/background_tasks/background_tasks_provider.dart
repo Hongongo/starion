@@ -47,7 +47,8 @@ class BackgroundFetchNotifier extends StateNotifier<bool?> {
 final backgroundPokemonFetchProvider =
     StateNotifierProvider<BackgroundFetchNotifier, bool?>((ref) {
   return BackgroundFetchNotifier(
-      processKeyName: fetchPeriodicBackgroundTaskKey);
+    processKeyName: fetchPeriodicBackgroundTaskKey,
+  );
 });
 
 // fetchPeriodicBackgroundTaskKey
