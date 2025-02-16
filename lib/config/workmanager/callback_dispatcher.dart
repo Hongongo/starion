@@ -1,5 +1,7 @@
 import 'package:workmanager/workmanager.dart';
 
+import '../../infrastructure/infrastructure.dart';
+
 const fetchBackgroundTaskKey = 'com.stardev.starpoint.fetch-background-pokemon';
 const fetchPeriodicBackgroundTaskKey =
     'com.stardev.starpoint.fetch-periodic-background-pokemon';
@@ -10,13 +12,11 @@ void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
     switch (task) {
       case fetchBackgroundTaskKey:
-        // await loadNextPokemon();
-        print(fetchBackgroundTaskKey);
+        await loadNextPokemon();
         break;
 
       case fetchPeriodicBackgroundTaskKey:
-        // await loadNextPokemon();
-        print(fetchPeriodicBackgroundTaskKey);
+        await loadNextPokemon();
         break;
 
       case Workmanager.iOSBackgroundTask:
@@ -31,19 +31,19 @@ void callbackDispatcher() {
 }
 
 
-// Future loadNextPokemon() async {
-//   final localDbRepository = LocalDbRepositoryImpl();
-//   final pokemonRepository = PokemonsRepositoryImpl();
+Future loadNextPokemon() async {
+  final localDbRepository = LocalDbRepositoryImpl();
+  final pokemonRepository = PokemonsRepositoryImpl();
 
-//   final lastPokemonId = await localDbRepository.pokemonCount() + 1;
+  final lastPokemonId = await localDbRepository.pokemonCount() + 1;
 
-//   try {
-//     final ( pokemon, message ) = await pokemonRepository.getPokemon('$lastPokemonId');
-//     if ( pokemon == null ) throw message;
+  try {
+    final ( pokemon, message ) = await pokemonRepository.getPokemon('$lastPokemonId');
+    if ( pokemon == null ) throw message;
 
-//     await localDbRepository.insertPokemon(pokemon);
-//     print('Pokemon inserted: ${ pokemon.name }!!');
-//   } catch (e) {
-//     print('$e');
-//   }
-// }
+    await localDbRepository.insertPokemon(pokemon);
+    print('Pokemon inserted: ${ pokemon.name }!!');
+  } catch (e) {
+    print('$e');
+  }
+}
