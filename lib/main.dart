@@ -19,18 +19,18 @@ void main() async {
         true, // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
   );
 
-    Workmanager().registerOneOffTask(
-    "com.stardev.starion.simpleTask1",
-    "com.stardev.starion.simpleTask",
-    inputData: { 'hola': 'mundo' },
-    constraints: Constraints(
-        networkType: NetworkType.connected,
-        // requiresBatteryNotLow: true,
-        // requiresCharging: true,
-        // requiresDeviceIdle: true,
-        // requiresStorageNotLow: true
-    )
-  );
+  //   Workmanager().registerOneOffTask(
+  //   "com.stardev.starion.simpleTask1",
+  //   "com.stardev.starion.simpleTask",
+  //   inputData: { 'hola': 'mundo' },
+  //   constraints: Constraints(
+  //       networkType: NetworkType.connected,
+  //       // requiresBatteryNotLow: true,
+  //       // requiresCharging: true,
+  //       // requiresDeviceIdle: true,
+  //       // requiresStorageNotLow: true
+  //   )
+  // );
 
   Workmanager().registerOneOffTask('task-identifier', 'simpleTask');
 
