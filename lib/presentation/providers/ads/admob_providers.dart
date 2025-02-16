@@ -2,10 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../../config/config.dart';
+import '../providers.dart';
 
 final adBannerProvider = FutureProvider<BannerAd>((ref) async {
-  // final showAds = ref.watch(showAdsProvider);
-  // if (!showAds) throw 'Ads están bloqueadas';
+  final showAds = ref.watch(showAdsProvider);
+  if (!showAds) throw 'Ads están bloqueadas';
 
   final ad = await AdmobPlugin.loadBannerAd();
 
@@ -14,8 +15,8 @@ final adBannerProvider = FutureProvider<BannerAd>((ref) async {
 
 final adInterstitialProvider =
     FutureProvider.autoDispose<InterstitialAd>((ref) async {
-  // final showAds = ref.watch(showAdsProvider);
-  // if (!showAds) throw 'Ads están bloqueadas';
+  final showAds = ref.watch(showAdsProvider);
+  if (!showAds) throw 'Ads están bloqueadas';
 
   final ad = await AdmobPlugin.loadInterstitialAd();
 
@@ -23,8 +24,8 @@ final adInterstitialProvider =
 });
 
 final adRewardedProvider = FutureProvider.autoDispose<RewardedAd>((ref) async {
-  // final showAds = ref.watch(showAdsProvider);
-  // if (!showAds) throw 'Ads están bloqueadas';
+  final showAds = ref.watch(showAdsProvider);
+  if (!showAds) throw 'Ads están bloqueadas';
 
   final ad = await AdmobPlugin.loadRewardedAd();
 
